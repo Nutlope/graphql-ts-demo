@@ -28,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
     getAllUsers: {
       type: new GraphQLList(UserType),
       args: { id: { type: GraphQLInt } },
-      resolve(parent: any, args: any) {
+      resolve() {
         return userData;
       },
     },
@@ -47,7 +47,7 @@ const Mutation = new GraphQLObjectType({
         gender: { type: GraphQLString },
         ipAddress: { type: GraphQLString },
       },
-      resolve(parent: any, args: any) {
+      resolve(args: typeof UserType) {
         userData.push({ id: userData.length + 1, ...args });
         return args;
       },
