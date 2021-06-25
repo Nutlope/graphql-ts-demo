@@ -11,6 +11,16 @@ const QueryAllUsers = gql`
   }
 `;
 
+interface UserInterface {
+  __typename: string;
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  ipAddress: string;
+}
+
 function App() {
   const { data, loading, error } = useQuery(QueryAllUsers);
 
@@ -20,7 +30,7 @@ function App() {
       {loading && "It's loading"}
       {error && error.message}
       {data &&
-        data["getAllUsers"].map((user: any) => (
+        data["getAllUsers"].map((user: UserInterface) => (
           <div className="listItem">
             <h3>{user["firstName"]}</h3>
             <p>{user["email"]}</p>

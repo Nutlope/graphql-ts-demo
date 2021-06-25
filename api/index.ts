@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
 var cors = require("cors");
-const port = 3000;
+const port = 4000;
 const userData = require("./mock_data.json");
 const graphql = require("graphql");
 const { graphqlHTTP } = require("express-graphql");
-
 const { GraphQLObjectType, GraphQLSchema, GraphQLInt } = graphql;
 const { GraphQLString, GraphQLList } = graphql;
 
@@ -29,7 +28,7 @@ const RootQuery = new GraphQLObjectType({
     getAllUsers: {
       type: new GraphQLList(UserType),
       args: { id: { type: GraphQLInt } },
-      resolve(parent, args) {
+      resolve(parent: any, args: any) {
         return userData;
       },
     },
@@ -48,7 +47,7 @@ const Mutation = new GraphQLObjectType({
         gender: { type: GraphQLString },
         ipAddress: { type: GraphQLString },
       },
-      resolve(parents, args) {
+      resolve(parent: any, args: any) {
         userData.push({ id: userData.length + 1, ...args });
         return args;
       },
